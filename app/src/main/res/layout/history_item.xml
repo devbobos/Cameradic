@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+    android:background="@drawable/shape_rectangle_bottom">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:paddingHorizontal="@dimen/padding_camera">
+        <TextView
+            android:id="@+id/item_textview_title"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAvalonDeepYellow"
+            android:layout_alignParentTop="true"
+            android:paddingTop="4dp"
+            android:gravity="left"
+            android:textSize="@dimen/textsize_h5"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="lorem ipsum"/>
+        <TextView
+            android:id="@+id/item_textview_description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:paddingTop="33dp"
+            android:textColor="@color/colorAvalonWhite"
+            android:textSize="@dimen/textsize_h6"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Cum sociis natoque penatibus et magnis dis parturient montes , nascetur ridiculus mus. Maecenas faucibus mollis interdum. Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam quis risus eget urna mollis ornare vel eu leo."/>
+        <TextView
+            android:id="@+id/item_textview_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:paddingTop="88dp"
+            android:textSize="@dimen/textsize_subtitle1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/colorAvalonWhitePressed"
+            android:text="Cum sociis natoque penatibus et magnis dis parturient montes , nascetur ridiculus mus. Maecenas faucibus mollis interdum. Nullam id dolor id nibh ultricies vehicula ut id elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam quis risus eget urna mollis ornare vel eu leo."/>
+        <ImageView
+            android:id="@+id/item_imageview_favorite"
+            android:layout_width="@dimen/imageview_icon_size_small"
+            android:layout_height="@dimen/imageview_icon_size_small"
+            android:padding="@dimen/padding_icon"
+            android:layout_alignParentRight="true"
+            android:tint="@color/colorAvalonDeepYellow"
+            app:srcCompat="@drawable/ic_bookmark_border_black_24dp"/>
+        <ImageView
+            android:id="@+id/item_imageview_link"
+            android:layout_width="@dimen/imageview_icon_size_small"
+            android:layout_height="@dimen/imageview_icon_size_small"
+            android:padding="@dimen/padding_icon"
+            android:tint="@color/colorAvalonDeepYellow"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/imageview_icon_size_small"
+            app:srcCompat="@drawable/ic_public_black_24dp"/>
+    </RelativeLayout>
+</LinearLayout>

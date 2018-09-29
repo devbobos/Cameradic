@@ -1,0 +1,77 @@
+<resources>
+    <string name="app_name">Cameradic</string>
+
+    <string name="common_network_unavailable">인터넷이 연결되어 있지 않습니다.</string>
+    <string name="common_request_permission">This sample needs camera permission.</string>
+    <string name="common_camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="guide_api_level_info">Cameradic은 Android 5.0 이상의 기기에서 동작합니다.</string>
+    <string name="guide_title_permission">권한 허용하기</string>
+    <string name="guide_title_destroy">앱 종료하기</string>
+    <string name="guide_permission_info">Cameradic을 사용하기 위해 카메라 사용 권한이 필요합니다. 촬영 정보는 대상을 인식하는데 사용되며 사용자 동의없이 활용되지 않습니다.</string>
+    <string name="guide_permission_popup_info">권한 요청</string>
+    <string name="guide_permission_popup_info_description">카메라 사용 권한을 허용해 주시겠습니까?</string>
+    <string name="guide_permission_popup_info_accept">허용하기</string>
+    <string name="guide_permission_popup_info_decline">거부하기</string>
+    <string name="guide_permission_popup_deny">경고</string>
+    <string name="guide_permission_popup_deny_description">카메라 권한이 없을 경우 앱을 사용할 수 없습니다.</string>
+    <string name="guide_permission_popup_api_level">앱을 종료하시겠습니까?</string>
+    <string name="guide_permission_popup_deny_accept">허용하기</string>
+    <string name="guide_permission_popup_deny_decline">종료하기</string>
+    <string name="setting_title">설정</string>
+    <string name="setting_title_recognition">정확도</string>
+    <string name="setting_description_recognition">머신러닝에서 판단한 사물의 정확도를 의미합니다</string>
+    <string name="setting_title_autorecording">자동기록</string>
+    <string name="setting_description_autorecording">검색을 하거나 촬영을 할때 사물을 자동으로 기록합니다</string>
+    <string name="setting_title_showrecognition">정확도 표시</string>
+    <string name="setting_description_showrecognition">해당 옵션을 사용하면 사물의 정확도가 같이 표시됩니다</string>
+    <string name="setting_title_resetdatabase">기록초기화</string>
+    <string name="setting_description_resetdatabase">지금까지 기록했던 히스토리가 전부 삭제됩니다</string>
+    <string name="setting_title_selectdictionary">사전선택</string>
+    <string name="setting_description_selectdictionary">사용할 사전을 선택해주세요</string>
+    <string name="setting_title_license">오픈소스라이선스</string>
+    <string name="setting_description_license">오픈소스 소프트웨어에 대한 라이선스 정보</string>
+    <string name="setting_popup_recognition_title">최소 정확도</string>
+    <string name="setting_popup_recognition_description">사물을 인식 하기 위한 최소 정확도를 입력해주세요. 최소 정확도 보다 높아야 결과로 인식합니다.</string>
+    <string name="setting_popup_dictionary_title">사전선택</string>
+    <string name="setting_popup_resetdatabase_title">기록초기화</string>
+    <string name="setting_popup_resetdatabase_description">기록을 초기화 하시겠습니까? 모든 검색 기록이 사라집니다.</string>
+    <string name="setting_popup_accept">선택하기</string>
+    <string name="setting_popup_reset">초기화하기</string>
+    <string name="setting_popup_decline">취소하기</string>
+    <string name="camera_progress_title_search">검색 중 입니다</string>
+    <string-array name="camera_progress_description">
+        <item>카메라에 비춰진 이미지를 머신러닝을 사용해 인식합니다</item>
+        <item>어두울 경우 인식이 잘 되지 않을 수 있습니다\n플래쉬를 사용하여 인식할 수 있도록 도와주세요!</item>
+        <item>사물이 여러 개일 경우 정확도가 낮게 나올 수 있습니다\n하나의 사물을 카메라로 비춰주세요!</item>
+        <item>정확도가 너무 높으면 결과가 나오지 않을 수 있습니다\n정확도를 적당한 수치로 맞춰주세요</item>
+        <item>정확도 표시 옵션을 키면 물체의 정확도를 표시 할 수 있습니다</item>
+        <item>CAMERADIC은 대략 100여 개의 사물 인식이 가능합니다</item>
+        <item>CAMERADIC은 백과사전을 비롯하여 한일, 한중, 한러 사전을 지원합니다</item>
+    </string-array>
+    <string name="camera_information_network_title">오류발생</string>
+    <string name="camera_information_network_description">네트워크 연결이 불안정합니다</string>
+    <string name="camera_information_camera_title">오류발생</string>
+    <string name="camera_information_camera_description">카메라 권한이 없습니다</string>
+    <string name="detail_title">자세히보기</string>
+    <string name="history_title">기록</string>
+    <string name="history_information_nothing">아직 기록이 없습니다</string>
+    <string name="history_information_favorite_nothing">즐겨찾기가 없습니다</string>
+    <string name="search_title">검색하기</string>
+    <string name="search_edittext_hint">검색어를 입력해주세요</string>
+    <string name="search_edittext_hint_empty">검색어 란이 비어 있습니다.</string>
+    <string name="search_information">오른쪽 검색 아이콘을 누르시면 직접 사전을 검색할 수 있습니다.</string>
+    <string name="search_information_nothing">검색 결과가 없습니다.</string>
+    <string name="search_information_retry">재시도하기</string>
+    <string name="search_information_changedictionary">사전바꾸기</string>
+    <string name="menu_search">검색</string>
+    <string name="menu_information">정보</string>
+    <string name="menu_share">공유하기</string>
+    <string name="menu_link">웹버전 보기</string>
+    <string name="itemdetail_favorite">즐겨찾기에 추가하기</string>
+    <string name="itemdetail_link">웹버전 보기</string>
+    <string name="itemdetail_delete">기록에서 삭제하기</string>
+    <string name="itemdetail_insert">기록하기</string>
+    <string name="itemdetail_popup_insert">기록되었습니다</string>
+    <string name="itemdetail_popup_delete">삭제</string>
+    <string name="itemdetail_popup_delete_description">정말로 기록에서 삭제하시겠습니까?</string>
+</resources>

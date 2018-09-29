@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="imageview_icon_size_big">120dp</dimen>
+    <dimen name="imageview_icon_size_small">40dp</dimen>
+    <dimen name="padding_default">16dp</dimen>
+    <dimen name="padding_camera">8dp</dimen>
+    <dimen name="padding_icon">4dp</dimen>
+    <dimen name="padding_text_horizontal">64dp</dimen>
+    <dimen name="textsize_h1">96dp</dimen>
+    <dimen name="textsize_h2">60dp</dimen>
+    <dimen name="textsize_h3">48dp</dimen>
+    <dimen name="textsize_h4">34dp</dimen>
+    <dimen name="textsize_h5">24dp</dimen>
+    <dimen name="textsize_h6">20dp</dimen>
+    <dimen name="textsize_subtitle1">16dp</dimen>
+    <dimen name="textsize_subtitle2">14dp</dimen>
+    <dimen name="textsize_body1">16dp</dimen>
+    <dimen name="textsize_body2">14dp</dimen>
+    <dimen name="textsize_button">14dp</dimen>
+    <dimen name="textsize_caption">12dp</dimen>
+    <dimen name="textsize_overline">10dp</dimen>
+</resources>

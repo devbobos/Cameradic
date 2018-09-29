@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#003368</color>
+    <color name="colorPrimaryDark">#003368</color>
+    <color name="colorAccent">#ffc900</color>
+
+    <color name="colorAvalonDeepBlue">#003368</color>
+    <color name="colorAvalonDeepBlueTransparent">#CC003368</color>
+    <color name="colorAvalonBlue">#002852</color>
+    <color name="colorAvalonYellow">#ffe200</color>
+    <color name="colorAvalonDeepYellow">#ffc900</color>
+    <color name="colorAvalonWhite">#fefefe</color>
+    <color name="colorAvalonWhitePressed">#cbcbcb</color>
+    <color name="colorAvalonWhiteActionDown">#989898</color>
+    <color name="colorAvalonRed">#ff4a00</color>
+    <color name="colorTransparent">#00000000</color>
+</resources>

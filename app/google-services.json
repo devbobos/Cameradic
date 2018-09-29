@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "358996444402",
+    "firebase_url": "https://cameradic-eb41e.firebaseio.com",
+    "project_id": "cameradic-eb41e",
+    "storage_bucket": "cameradic-eb41e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358996444402:android:2f766a8e7734f377",
+        "android_client_info": {
+          "package_name": "io.github.devbobos.cameradic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358996444402-vokhhg0g4f3ecn1k250licq6sfakh0il.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDbpJAYMOliafXHDHvsUqVVPWeC7Y_jRM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
