@@ -794,7 +794,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                             {
                                                 recognitionTitleBuffer = result.getTitle();
                                                 recognitionDictionaryTypeBuffer = PreferenceHelper.getInstance().getDictionaryType(getApplicationContext());
-                                                setCameraHistoryList(result.getTitle(), result.getConfidence());
+                                                setCameraHistoryList(TextHelper.getInstance().getKoreanFromResultTitle(result.getTitle()), result.getConfidence());
                                             }
                                             else
                                             {
@@ -803,7 +803,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                                 {
                                                     recognitionTitleBuffer = result.getTitle();
                                                     recognitionDictionaryTypeBuffer = PreferenceHelper.getInstance().getDictionaryType(getApplicationContext());
-                                                    setCameraHistoryList(result.getTitle(), result.getConfidence());
+                                                    setCameraHistoryList(TextHelper.getInstance().getKoreanFromResultTitle(result.getTitle()), result.getConfidence());
                                                 }
                                                 else
                                                 {
@@ -1008,7 +1008,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                                 recognitionValue * 100,
                                                 titleBuilder.toString(),
                                                 TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
-                                                SystemConstant.URL_GLOSBE_EN_EN + title,
+                                                SystemConstant.URL_GLOSBE_KO_EN + title,
                                                 null,
                                                 SystemConstant.LANGUAGE_TYPE_ENGLISH
                                         ));
@@ -1018,7 +1018,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                                 recognitionValue * 100,
                                                 glosbeResponse.getPhrase(),
                                                 TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
-                                                SystemConstant.URL_GLOSBE_EN_EN + title,
+                                                SystemConstant.URL_GLOSBE_KO_EN + title,
                                                 null,
                                                 SystemConstant.LANGUAGE_TYPE_ENGLISH
                                         ));
@@ -1063,7 +1063,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                                 recognitionValue * 100,
                                                 titleBuilder.toString(),
                                                 TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
-                                                SystemConstant.URL_GLOSBE_EN_JP + title,
+                                                SystemConstant.URL_GLOSBE_KO_JP + title,
                                                 null,
                                                 SystemConstant.LANGUAGE_TYPE_JAPANESE
                                         ));
@@ -1073,7 +1073,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                                 recognitionValue * 100,
                                                 glosbeResponse.getPhrase(),
                                                 TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
-                                                SystemConstant.URL_GLOSBE_EN_JP + title,
+                                                SystemConstant.URL_GLOSBE_KO_JP + title,
                                                 null,
                                                 SystemConstant.LANGUAGE_TYPE_JAPANESE
                                         ));
@@ -1118,7 +1118,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                                 recognitionValue * 100,
                                                 titleBuilder.toString(),
                                                 TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
-                                                SystemConstant.URL_GLOSBE_EN_CN + title,
+                                                SystemConstant.URL_GLOSBE_KO_CN + title,
                                                 null,
                                                 SystemConstant.LANGUAGE_TYPE_CHINESE
                                         ));
@@ -1128,7 +1128,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                                 recognitionValue * 100,
                                                 glosbeResponse.getPhrase(),
                                                 TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
-                                                SystemConstant.URL_GLOSBE_EN_CN + title,
+                                                SystemConstant.URL_GLOSBE_KO_CN + title,
                                                 null,
                                                 SystemConstant.LANGUAGE_TYPE_CHINESE
                                         ));
@@ -1173,7 +1173,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                                 recognitionValue * 100,
                                                 titleBuilder.toString(),
                                                 TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
-                                                SystemConstant.URL_GLOSBE_EN_RN + title,
+                                                SystemConstant.URL_GLOSBE_KO_RN + title,
                                                 null,
                                                 SystemConstant.LANGUAGE_TYPE_RUSSIAN
                                         ));
@@ -1183,7 +1183,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                                 recognitionValue * 100,
                                                 glosbeResponse.getPhrase(),
                                                 TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
-                                                SystemConstant.URL_GLOSBE_EN_RN + title,
+                                                SystemConstant.URL_GLOSBE_KO_RN + title,
                                                 null,
                                                 SystemConstant.LANGUAGE_TYPE_RUSSIAN
                                         ));
