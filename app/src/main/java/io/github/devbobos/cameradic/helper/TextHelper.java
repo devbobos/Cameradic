@@ -139,7 +139,7 @@ public class TextHelper
         }
         else if(input.equals("stop sign"))
         {
-            return "차 정지표지";
+            return "정지 표지";
         }
         else if(input.equals("parking meter"))
         {
@@ -231,11 +231,11 @@ public class TextHelper
         }
         else if(input.equals("baseball bat"))
         {
-            return "야구 방망이";
+            return "방망이";
         }
         else if(input.equals("baseball glove"))
         {
-            return "야구 글러브";
+            return "글러브";
         }
         else if(input.equals("skateboard"))
         {
@@ -247,7 +247,7 @@ public class TextHelper
         }
         else if(input.equals("tennis racket"))
         {
-            return "테니스 라켓";
+            return "라켓";
         }
         else if(input.equals("bottle"))
         {
@@ -347,7 +347,7 @@ public class TextHelper
         }
         else if(input.equals("laptop"))
         {
-            return "랩톱 컴퓨터";
+            return "랩톱";
         }
         else if(input.equals("mouse"))
         {

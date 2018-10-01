@@ -18,8 +18,8 @@ public class GlosbeService
     private static GlosbeRequest request;
     private final String DEFAULT_PRETTY_VALUE = "true";
     private final String FORMAT_JSON = "json";
-    public final String LANGUAGE_ENGLISH = "en";
-    public final String LANGUAGE_KOREAN = "ko";
+    public final String LANGUAGE_ENGLISH = "eng";
+    public final String LANGUAGE_KOREAN = "kor";
     public final String LANGUAGE_JAPANESE = "jpn";
     public final String LANGUAGE_RUSSIAN = "rus";
     public final String LANGUAGE_CHINESE = "cmn";

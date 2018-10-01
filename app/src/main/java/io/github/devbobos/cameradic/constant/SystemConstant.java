@@ -9,7 +9,7 @@ public class SystemConstant
     public static final String CLIENT_ID_NAVER_DICTIONARY = "b9U3hdwFQWghctAgoBbN";
     public static final String SECRET_NAVER_DICTIONARY = "Y46KV1dS_1";
     public static final String URL_NAVER_DICTIONARY = "https://openapi.naver.com/v1/search/";
-    public static final String URL_GLOSBE_API = "https://kr.glosbe.com/gapi/";
+    public static final String URL_GLOSBE_API = "https://glosbe.com/gapi/";
     public static final String URL_GLOSBE_EN_EN = "https://glosbe.com/en/en/";
     public static final String URL_GLOSBE_EN_KO = "https://glosbe.com/en/ko/";
     public static final String URL_GLOSBE_EN_JP = "https://glosbe.com/en/ja/";

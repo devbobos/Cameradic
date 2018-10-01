@@ -936,7 +936,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                 GlosbeResponse glosbeResponse = response.body();
                                 if(glosbeResponse!=null)
                                 {
-                                    Logger.d("request glosbe dictionary success : "+response.body().toString());
+                                    Logger.d("request glosbe dictionary success : " + response.body().toString()+"\n"+call.request().url());
                                     for(Tuc tuc : glosbeResponse.getTuc())
                                     {
                                         for(Meaning meaning : tuc.getMeanings())
@@ -982,7 +982,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                 });
                 break;
             case SystemConstant.LANGUAGE_TYPE_ENGLISH:
-                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_ENGLISH, GlosbeService.getInstance().LANGUAGE_ENGLISH);
+                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_ENGLISH);
                 glosbeResponseCall.enqueue(new Callback<GlosbeResponse>()
                 {
                     @Override
@@ -992,7 +992,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                         GlosbeResponse glosbeResponse = response.body();
                         if (glosbeResponse != null)
                         {
-                            Logger.d("request glosbe dictionary success : " + response.body().toString());
+                            Logger.d("request glosbe dictionary success : " + response.body().toString()+"\n"+call.request().url());
                             for (Tuc tuc : glosbeResponse.getTuc())
                             {
                                 for (Meaning meaning : tuc.getMeanings())
@@ -1037,7 +1037,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                 });
                 break;
             case SystemConstant.LANGUAGE_TYPE_JAPANESE:
-                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_ENGLISH, GlosbeService.getInstance().LANGUAGE_JAPANESE);
+                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_JAPANESE);
                 glosbeResponseCall.enqueue(new Callback<GlosbeResponse>()
                 {
                     @Override
@@ -1047,7 +1047,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                         GlosbeResponse glosbeResponse = response.body();
                         if (glosbeResponse != null)
                         {
-                            Logger.d("request glosbe dictionary success : " + response.body().toString());
+                            Logger.d("request glosbe dictionary success : " + response.body().toString()+"\n"+call.request().url());
                             for (Tuc tuc : glosbeResponse.getTuc())
                             {
                                 for (Meaning meaning : tuc.getMeanings())
@@ -1092,7 +1092,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                 });
                 break;
             case SystemConstant.LANGUAGE_TYPE_CHINESE:
-                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_ENGLISH, GlosbeService.getInstance().LANGUAGE_CHINESE);
+                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_CHINESE);
                 glosbeResponseCall.enqueue(new Callback<GlosbeResponse>()
                 {
                     @Override
@@ -1102,7 +1102,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                         GlosbeResponse glosbeResponse = response.body();
                         if (glosbeResponse != null)
                         {
-                            Logger.d("request glosbe dictionary success : " + response.body().toString());
+                            Logger.d("request glosbe dictionary success : " + response.body().toString()+"\n"+call.request().url());
                             for (Tuc tuc : glosbeResponse.getTuc())
                             {
                                 for (Meaning meaning : tuc.getMeanings())
@@ -1147,7 +1147,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                 });
                 break;
             case SystemConstant.LANGUAGE_TYPE_RUSSIAN:
-                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_ENGLISH, GlosbeService.getInstance().LANGUAGE_RUSSIAN);
+                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_RUSSIAN);
                 glosbeResponseCall.enqueue(new Callback<GlosbeResponse>()
                 {
                     @Override
@@ -1157,7 +1157,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                         GlosbeResponse glosbeResponse = response.body();
                         if (glosbeResponse != null)
                         {
-                            Logger.d("request glosbe dictionary success : " + response.body().toString());
+                            Logger.d("request glosbe dictionary success : " + response.body().toString()+"\n"+call.request().url());
                             for (Tuc tuc : glosbeResponse.getTuc())
                             {
                                 for (Meaning meaning : tuc.getMeanings())
