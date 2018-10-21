@@ -17,10 +17,7 @@ def models = ['conv_actions_tflite.zip',
               'coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip']
  */
 
-def models = ['conv_actions_tflite.zip',
-              'mobilenet_ssd_tflite_v1.zip',
-              'mobilenet_v1_224_android_quant_2017_11_08.zip',
-              'coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip']
+def models = ['mobilenet_ssd_tflite_v1.zip','coco_ssd_mobilenet_v1_1.0_quant_2018_06_29.zip']
 // LINT.ThenChange(//tensorflow/contrib/lite/examples/android/BUILD)
 
 // Root URL for model archives
@@ -45,6 +42,10 @@ task downloadFile(type: Download){
 
     dest new File(project.ext.TMP_DIR)
     overwrite true
+}
+task deleteUnusedFile(type: Delete) {
+    delete project.ext.ASSET_DIR, 'mobilenet_ssd.tflite'
+    followSymlinks = true
 }
 
 task extractModels(type: Copy) {
