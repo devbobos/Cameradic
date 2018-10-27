@@ -794,7 +794,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                             {
                                                 recognitionTitleBuffer = result.getTitle();
                                                 recognitionDictionaryTypeBuffer = PreferenceHelper.getInstance().getDictionaryType(getApplicationContext());
-                                                setCameraHistoryList(TextHelper.getInstance().getKoreanFromResultTitle(result.getTitle()), result.getConfidence());
+                                                setCameraHistoryList(result.getTitle(), result.getConfidence());
                                             }
                                             else
                                             {
@@ -803,7 +803,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                                 {
                                                     recognitionTitleBuffer = result.getTitle();
                                                     recognitionDictionaryTypeBuffer = PreferenceHelper.getInstance().getDictionaryType(getApplicationContext());
-                                                    setCameraHistoryList(TextHelper.getInstance().getKoreanFromResultTitle(result.getTitle()), result.getConfidence());
+                                                    setCameraHistoryList(result.getTitle(), result.getConfidence());
                                                 }
                                                 else
                                                 {
@@ -862,18 +862,17 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
     }
     private void setCameraHistoryList(String title, float recognitionValue)
     {
+        String titleKorean = TextHelper.getInstance().getKoreanFromResultTitle(title);
         Call<GlosbeResponse> glosbeResponseCall;
         switch (PreferenceHelper.getInstance().getDictionaryType(this))
         {
             case SystemConstant.LANGUAGE_TYPE_KOREAN:
-                Call<NaverDictionaryResponse> naverDictionaryResponseCall = NaverDictionaryService.getInstance().getNaverDictionaryResult(title);
+                Call<NaverDictionaryResponse> naverDictionaryResponseCall = NaverDictionaryService.getInstance().getNaverDictionaryResult(titleKorean);
                 naverDictionaryResponseCall.enqueue(new Callback<NaverDictionaryResponse>() {
                     @Override
                     public void onResponse(Call<NaverDictionaryResponse> call, Response<NaverDictionaryResponse> response)
                     {
                         List<CameraHistory> list = new ArrayList<>();
-                        List<Item> afterInputItem = new ArrayList<>();
-                        int koreanCount = 0;
                         if(response.body()!=null)
                         {
                             Logger.d("request naver dictionary success : "+response.body().toString());
@@ -882,38 +881,17 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                             {
                                 if(index.getDescription().length()>0)
                                 {
-                                    if(TextHelper.getInstance().getCharacterCode(TextHelper.getInstance().removeHtmlEntityOnResponse(index.getTitle())) == TextHelper.CHARACTER_KOREAN)
-                                    {
-                                        koreanCount++;
-                                        list.add(new CameraHistory(
-                                                recognitionValue * 100,
-                                                TextHelper.getInstance().removeHtmlEntityOnResponse(index.getTitle()),
-                                                TextHelper.getInstance().removeHtmlEntityOnResponse(index.getDescription()),
-                                                index.getLink(),
-                                                index.getThumbnail(),
-                                                SystemConstant.LANGUAGE_TYPE_KOREAN));
-                                    }
-                                    else
-                                    {
-                                        afterInputItem.add(index);
-                                    }
-                                }
-                            }
-                            if(koreanCount != 0)
-                            {
-                                for(int i = 0; i < afterInputItem.size(); i++)
-                                {
                                     list.add(new CameraHistory(
                                             recognitionValue * 100,
-                                            TextHelper.getInstance().removeHtmlEntityOnResponse(afterInputItem.get(i).getTitle()),
-                                            TextHelper.getInstance().removeHtmlEntityOnResponse(afterInputItem.get(i).getDescription()),
-                                            afterInputItem.get(i).getLink(),
-                                            afterInputItem.get(i).getThumbnail(),
+                                            TextHelper.getInstance().removeHtmlEntityOnResponse(index.getTitle()),
+                                            TextHelper.getInstance().removeHtmlEntityOnResponse(index.getDescription()),
+                                            index.getLink(),
+                                            index.getThumbnail(),
                                             SystemConstant.LANGUAGE_TYPE_KOREAN));
                                 }
                             }
                         }
-                        if(koreanCount!=0)
+                        if(list.size() > 0)
                         {
                             setRecognitionResult(list);
                         }
@@ -927,7 +905,8 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                     public void onFailure(Call<NaverDictionaryResponse> call, Throwable t)
                     {
                         Logger.d("request naver dictionary failed : "+t.getMessage());
-                        Call<GlosbeResponse> retryGlosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_ENGLISH);
+                        Call<GlosbeResponse> retryGlosbeResponseCall =
+                                GlosbeService.getInstance().getGlosbeResponse(titleKorean, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_KOREAN);
                         retryGlosbeResponseCall.enqueue(new Callback<GlosbeResponse>() {
                             @Override
                             public void onResponse(Call<GlosbeResponse> call, Response<GlosbeResponse> response)
@@ -946,7 +925,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                                 StringBuilder titleBuilder = new StringBuilder();
                                                 titleBuilder.append(tuc.getPhrase().getText());
                                                 titleBuilder.append(" (");
-                                                titleBuilder.append(title);
+                                                titleBuilder.append(titleKorean);
                                                 titleBuilder.append(")");
                                                 list.add(new CameraHistory(
                                                         recognitionValue * 100,
@@ -969,7 +948,65 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                         }
                                     }
                                 }
-                                setRecognitionResult(list);
+                                if(list.size() > 0)
+                                {
+                                    setRecognitionResult(list);
+                                }
+                                else
+                                {
+                                    Call<GlosbeResponse> retryGlosbeResponseCall =
+                                            GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_ENGLISH, GlosbeService.getInstance().LANGUAGE_KOREAN);
+                                    retryGlosbeResponseCall.enqueue(new Callback<GlosbeResponse>() {
+                                        @Override
+                                        public void onResponse(Call<GlosbeResponse> call, Response<GlosbeResponse> response)
+                                        {
+                                            List<CameraHistory> list = new ArrayList<>();
+                                            GlosbeResponse glosbeResponse = response.body();
+                                            if(glosbeResponse!=null)
+                                            {
+                                                Logger.d("request glosbe dictionary success : " + response.body().toString()+"\n"+call.request().url());
+                                                for(Tuc tuc : glosbeResponse.getTuc())
+                                                {
+                                                    for(Meaning meaning : tuc.getMeanings())
+                                                    {
+                                                        if(tuc.getPhrase()!=null && tuc.getPhrase().getText()!=null)
+                                                        {
+                                                            StringBuilder titleBuilder = new StringBuilder();
+                                                            titleBuilder.append(tuc.getPhrase().getText());
+                                                            titleBuilder.append(" (");
+                                                            titleBuilder.append(titleKorean);
+                                                            titleBuilder.append(")");
+                                                            list.add(new CameraHistory(
+                                                                    recognitionValue * 100,
+                                                                    titleBuilder.toString(),
+                                                                    TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
+                                                                    SystemConstant.URL_GLOSBE_KO_KO+title,
+                                                                    null,
+                                                                    SystemConstant.LANGUAGE_TYPE_KOREAN));
+                                                        }
+                                                        else
+                                                        {
+                                                            list.add(new CameraHistory(
+                                                                    recognitionValue * 100,
+                                                                    glosbeResponse.getPhrase(),
+                                                                    TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
+                                                                    SystemConstant.URL_GLOSBE_KO_KO+title,
+                                                                    null,
+                                                                    SystemConstant.LANGUAGE_TYPE_KOREAN));
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            setRecognitionResult(list);
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<GlosbeResponse> call, Throwable t)
+                                        {
+                                            Logger.d("request glosbe dictionary failed : "+t.getMessage());
+                                        }
+                                    });
+                                }
                             }
 
                             @Override
@@ -982,7 +1019,8 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                 });
                 break;
             case SystemConstant.LANGUAGE_TYPE_ENGLISH:
-                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_ENGLISH);
+                glosbeResponseCall =
+                        GlosbeService.getInstance().getGlosbeResponse(titleKorean, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_ENGLISH);
                 glosbeResponseCall.enqueue(new Callback<GlosbeResponse>()
                 {
                     @Override
@@ -1002,7 +1040,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                         StringBuilder titleBuilder = new StringBuilder();
                                         titleBuilder.append(tuc.getPhrase().getText());
                                         titleBuilder.append(" (");
-                                        titleBuilder.append(title);
+                                        titleBuilder.append(titleKorean);
                                         titleBuilder.append(")");
                                         list.add(new CameraHistory(
                                                 recognitionValue * 100,
@@ -1026,7 +1064,66 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                 }
                             }
                         }
-                        setRecognitionResult(list);
+                        if(list.size() > 0)
+                        {
+                            setRecognitionResult(list);
+                        }
+                        else
+                        {
+                            Call<GlosbeResponse> retryGlosbeResponseCall =
+                                    GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_ENGLISH, GlosbeService.getInstance().LANGUAGE_ENGLISH);
+                            retryGlosbeResponseCall.enqueue(new Callback<GlosbeResponse>() {
+                                @Override
+                                public void onResponse(Call<GlosbeResponse> call, Response<GlosbeResponse> response)
+                                {
+                                    List<CameraHistory> list = new ArrayList<>();
+                                    GlosbeResponse glosbeResponse = response.body();
+                                    if (glosbeResponse != null)
+                                    {
+                                        Logger.d("request glosbe dictionary success : " + response.body().toString()+"\n"+call.request().url());
+                                        for (Tuc tuc : glosbeResponse.getTuc())
+                                        {
+                                            for (Meaning meaning : tuc.getMeanings())
+                                            {
+                                                if (tuc.getPhrase() != null && tuc.getPhrase().getText() != null)
+                                                {
+                                                    StringBuilder titleBuilder = new StringBuilder();
+                                                    titleBuilder.append(tuc.getPhrase().getText());
+                                                    titleBuilder.append(" (");
+                                                    titleBuilder.append(titleKorean);
+                                                    titleBuilder.append(")");
+                                                    list.add(new CameraHistory(
+                                                            recognitionValue * 100,
+                                                            titleBuilder.toString(),
+                                                            TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
+                                                            SystemConstant.URL_GLOSBE_KO_EN + title,
+                                                            null,
+                                                            SystemConstant.LANGUAGE_TYPE_ENGLISH
+                                                    ));
+                                                } else
+                                                {
+                                                    list.add(new CameraHistory(
+                                                            recognitionValue * 100,
+                                                            glosbeResponse.getPhrase(),
+                                                            TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
+                                                            SystemConstant.URL_GLOSBE_KO_EN + title,
+                                                            null,
+                                                            SystemConstant.LANGUAGE_TYPE_ENGLISH
+                                                    ));
+                                                }
+                                            }
+                                        }
+                                    }
+                                    setRecognitionResult(list);
+                                }
+
+                                @Override
+                                public void onFailure(Call<GlosbeResponse> call, Throwable t)
+                                {
+                                    Logger.d("request glosbe dictionary failed : " + t.getMessage());
+                                }
+                            });
+                        }
                     }
 
                     @Override
@@ -1037,7 +1134,8 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                 });
                 break;
             case SystemConstant.LANGUAGE_TYPE_JAPANESE:
-                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_JAPANESE);
+                glosbeResponseCall =
+                        GlosbeService.getInstance().getGlosbeResponse(titleKorean, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_JAPANESE);
                 glosbeResponseCall.enqueue(new Callback<GlosbeResponse>()
                 {
                     @Override
@@ -1057,7 +1155,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                         StringBuilder titleBuilder = new StringBuilder();
                                         titleBuilder.append(tuc.getPhrase().getText());
                                         titleBuilder.append(" (");
-                                        titleBuilder.append(title);
+                                        titleBuilder.append(titleKorean);
                                         titleBuilder.append(")");
                                         list.add(new CameraHistory(
                                                 recognitionValue * 100,
@@ -1081,7 +1179,66 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                 }
                             }
                         }
-                        setRecognitionResult(list);
+                        if(list.size() > 0)
+                        {
+                            setRecognitionResult(list);
+                        }
+                        else
+                        {
+                            Call<GlosbeResponse> retryGlosbeResponseCall =
+                                    GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_ENGLISH, GlosbeService.getInstance().LANGUAGE_JAPANESE);
+                            retryGlosbeResponseCall.enqueue(new Callback<GlosbeResponse>() {
+                                @Override
+                                public void onResponse(Call<GlosbeResponse> call, Response<GlosbeResponse> response)
+                                {
+                                    List<CameraHistory> list = new ArrayList<>();
+                                    GlosbeResponse glosbeResponse = response.body();
+                                    if (glosbeResponse != null)
+                                    {
+                                        Logger.d("request glosbe dictionary success : " + response.body().toString()+"\n"+call.request().url());
+                                        for (Tuc tuc : glosbeResponse.getTuc())
+                                        {
+                                            for (Meaning meaning : tuc.getMeanings())
+                                            {
+                                                if (tuc.getPhrase() != null && tuc.getPhrase().getText() != null)
+                                                {
+                                                    StringBuilder titleBuilder = new StringBuilder();
+                                                    titleBuilder.append(tuc.getPhrase().getText());
+                                                    titleBuilder.append(" (");
+                                                    titleBuilder.append(titleKorean);
+                                                    titleBuilder.append(")");
+                                                    list.add(new CameraHistory(
+                                                            recognitionValue * 100,
+                                                            titleBuilder.toString(),
+                                                            TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
+                                                            SystemConstant.URL_GLOSBE_KO_JP + title,
+                                                            null,
+                                                            SystemConstant.LANGUAGE_TYPE_JAPANESE
+                                                    ));
+                                                } else
+                                                {
+                                                    list.add(new CameraHistory(
+                                                            recognitionValue * 100,
+                                                            glosbeResponse.getPhrase(),
+                                                            TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
+                                                            SystemConstant.URL_GLOSBE_KO_JP + title,
+                                                            null,
+                                                            SystemConstant.LANGUAGE_TYPE_JAPANESE
+                                                    ));
+                                                }
+                                            }
+                                        }
+                                    }
+                                    setRecognitionResult(list);
+                                }
+
+                                @Override
+                                public void onFailure(Call<GlosbeResponse> call, Throwable t)
+                                {
+                                    Logger.d("request glosbe dictionary failed : " + t.getMessage());
+                                }
+                            });
+                        }
                     }
 
                     @Override
@@ -1092,7 +1249,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                 });
                 break;
             case SystemConstant.LANGUAGE_TYPE_CHINESE:
-                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_CHINESE);
+                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(titleKorean, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_CHINESE);
                 glosbeResponseCall.enqueue(new Callback<GlosbeResponse>()
                 {
                     @Override
@@ -1112,7 +1269,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                         StringBuilder titleBuilder = new StringBuilder();
                                         titleBuilder.append(tuc.getPhrase().getText());
                                         titleBuilder.append(" (");
-                                        titleBuilder.append(title);
+                                        titleBuilder.append(titleKorean);
                                         titleBuilder.append(")");
                                         list.add(new CameraHistory(
                                                 recognitionValue * 100,
@@ -1136,7 +1293,66 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                 }
                             }
                         }
-                        setRecognitionResult(list);
+                        if(list.size() > 0)
+                        {
+                            setRecognitionResult(list);
+                        }
+                        else
+                        {
+                            Call<GlosbeResponse> retryGlosbeResponseCall =
+                                    GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_ENGLISH, GlosbeService.getInstance().LANGUAGE_CHINESE);
+                            retryGlosbeResponseCall.enqueue(new Callback<GlosbeResponse>() {
+                                @Override
+                                public void onResponse(Call<GlosbeResponse> call, Response<GlosbeResponse> response)
+                                {
+                                    List<CameraHistory> list = new ArrayList<>();
+                                    GlosbeResponse glosbeResponse = response.body();
+                                    if (glosbeResponse != null)
+                                    {
+                                        Logger.d("request glosbe dictionary success : " + response.body().toString()+"\n"+call.request().url());
+                                        for (Tuc tuc : glosbeResponse.getTuc())
+                                        {
+                                            for (Meaning meaning : tuc.getMeanings())
+                                            {
+                                                if (tuc.getPhrase() != null && tuc.getPhrase().getText() != null)
+                                                {
+                                                    StringBuilder titleBuilder = new StringBuilder();
+                                                    titleBuilder.append(tuc.getPhrase().getText());
+                                                    titleBuilder.append(" (");
+                                                    titleBuilder.append(titleKorean);
+                                                    titleBuilder.append(")");
+                                                    list.add(new CameraHistory(
+                                                            recognitionValue * 100,
+                                                            titleBuilder.toString(),
+                                                            TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
+                                                            SystemConstant.URL_GLOSBE_KO_CN + title,
+                                                            null,
+                                                            SystemConstant.LANGUAGE_TYPE_CHINESE
+                                                    ));
+                                                } else
+                                                {
+                                                    list.add(new CameraHistory(
+                                                            recognitionValue * 100,
+                                                            glosbeResponse.getPhrase(),
+                                                            TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
+                                                            SystemConstant.URL_GLOSBE_KO_CN + title,
+                                                            null,
+                                                            SystemConstant.LANGUAGE_TYPE_CHINESE
+                                                    ));
+                                                }
+                                            }
+                                        }
+                                    }
+                                    setRecognitionResult(list);
+                                }
+
+                                @Override
+                                public void onFailure(Call<GlosbeResponse> call, Throwable t)
+                                {
+                                    Logger.d("request glosbe dictionary failed : " + t.getMessage());
+                                }
+                            });
+                        }
                     }
 
                     @Override
@@ -1147,7 +1363,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                 });
                 break;
             case SystemConstant.LANGUAGE_TYPE_RUSSIAN:
-                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_RUSSIAN);
+                glosbeResponseCall = GlosbeService.getInstance().getGlosbeResponse(titleKorean, GlosbeService.getInstance().LANGUAGE_KOREAN, GlosbeService.getInstance().LANGUAGE_RUSSIAN);
                 glosbeResponseCall.enqueue(new Callback<GlosbeResponse>()
                 {
                     @Override
@@ -1167,7 +1383,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                         StringBuilder titleBuilder = new StringBuilder();
                                         titleBuilder.append(tuc.getPhrase().getText());
                                         titleBuilder.append(" (");
-                                        titleBuilder.append(title);
+                                        titleBuilder.append(titleKorean);
                                         titleBuilder.append(")");
                                         list.add(new CameraHistory(
                                                 recognitionValue * 100,
@@ -1191,7 +1407,66 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
                                 }
                             }
                         }
-                        setRecognitionResult(list);
+                        if(list.size() > 0)
+                        {
+                            setRecognitionResult(list);
+                        }
+                        else
+                        {
+                            Call<GlosbeResponse> retryGlosbeResponseCall =
+                                    GlosbeService.getInstance().getGlosbeResponse(title, GlosbeService.getInstance().LANGUAGE_ENGLISH, GlosbeService.getInstance().LANGUAGE_RUSSIAN);
+                            retryGlosbeResponseCall.enqueue(new Callback<GlosbeResponse>() {
+                                @Override
+                                public void onResponse(Call<GlosbeResponse> call, Response<GlosbeResponse> response)
+                                {
+                                    List<CameraHistory> list = new ArrayList<>();
+                                    GlosbeResponse glosbeResponse = response.body();
+                                    if (glosbeResponse != null)
+                                    {
+                                        Logger.d("request glosbe dictionary success : " + response.body().toString()+"\n"+call.request().url());
+                                        for (Tuc tuc : glosbeResponse.getTuc())
+                                        {
+                                            for (Meaning meaning : tuc.getMeanings())
+                                            {
+                                                if (tuc.getPhrase() != null && tuc.getPhrase().getText() != null)
+                                                {
+                                                    StringBuilder titleBuilder = new StringBuilder();
+                                                    titleBuilder.append(tuc.getPhrase().getText());
+                                                    titleBuilder.append(" (");
+                                                    titleBuilder.append(titleKorean);
+                                                    titleBuilder.append(")");
+                                                    list.add(new CameraHistory(
+                                                            recognitionValue * 100,
+                                                            titleBuilder.toString(),
+                                                            TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
+                                                            SystemConstant.URL_GLOSBE_KO_RN + title,
+                                                            null,
+                                                            SystemConstant.LANGUAGE_TYPE_RUSSIAN
+                                                    ));
+                                                } else
+                                                {
+                                                    list.add(new CameraHistory(
+                                                            recognitionValue * 100,
+                                                            glosbeResponse.getPhrase(),
+                                                            TextHelper.getInstance().removeHtmlEntityOnResponse(meaning.getText()),
+                                                            SystemConstant.URL_GLOSBE_KO_RN + title,
+                                                            null,
+                                                            SystemConstant.LANGUAGE_TYPE_RUSSIAN
+                                                    ));
+                                                }
+                                            }
+                                        }
+                                    }
+                                    setRecognitionResult(list);
+                                }
+
+                                @Override
+                                public void onFailure(Call<GlosbeResponse> call, Throwable t)
+                                {
+                                    Logger.d("request glosbe dictionary failed : " + t.getMessage());
+                                }
+                            });
+                        }
                     }
 
                     @Override

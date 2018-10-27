@@ -38,6 +38,7 @@ import io.github.devbobos.cameradic.constant.Classifier;
 import io.github.devbobos.cameradic.constant.SystemConstant;
 import io.github.devbobos.cameradic.helper.ImageHelper;
 import io.github.devbobos.cameradic.helper.PreferenceHelper;
+import io.github.devbobos.cameradic.helper.TextHelper;
 
 /**
  * A tracker wrapping ObjectTracker that also handles non-max suppression and matching existing
@@ -188,21 +189,24 @@ public class MultiBoxTracker
       canvas.drawRoundRect(trackedPos, cornerSize, cornerSize, boxPaint);
 
       StringBuilder builder = new StringBuilder();
-      if(PreferenceHelper.getInstance().getShowRecognitionValue(context) == SystemConstant.SHOW_RECOGNITION_VALUE_ENABLED)
+      String title = recognition.title;
+      if(!TextUtils.isEmpty(title))
       {
-        if(!TextUtils.isEmpty(recognition.title))
+        if(PreferenceHelper.getInstance().getDictionaryType(context) == SystemConstant.LANGUAGE_TYPE_KOREAN)
         {
-          builder.append(String.format("%s %.2f", recognition.title, recognition.detectionConfidence*100));
+          title = TextHelper.getInstance().getKoreanFromResultTitle(title);
+        }
+        if(PreferenceHelper.getInstance().getShowRecognitionValue(context) == SystemConstant.SHOW_RECOGNITION_VALUE_ENABLED)
+        {
+          builder.append(String.format("%s %.2f", title, recognition.detectionConfidence*100));
           builder.append("%");
         }
-      }
-      else
-      {
-        if(!TextUtils.isEmpty(recognition.title))
+        else
         {
-          builder.append(String.format("%s", recognition.title));
+          builder.append(String.format("%s", title));
         }
       }
+
       borderedText.drawText(canvas, trackedPos.left + cornerSize, trackedPos.bottom, builder.toString());
     }
   }

@@ -41,4 +41,5 @@ public class CameraPresenter
         return textArray[position];
     }
 
+
 }
