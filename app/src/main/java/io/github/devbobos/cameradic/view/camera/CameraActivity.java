@@ -540,7 +540,7 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
             fragment = camera2Fragment;
         } else {
             fragment = new LegacyCameraConnectionFragment(this, getLayoutId(), getDesiredPreviewFrameSize());
-            Toast.makeText(this, "LegacyCameraConnection!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "LegacyCameraConnection!", Toast.LENGTH_SHORT).show();
         }
 
         getFragmentManager()

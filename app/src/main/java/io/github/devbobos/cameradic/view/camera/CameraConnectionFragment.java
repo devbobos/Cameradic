@@ -458,7 +458,10 @@ public class CameraConnectionFragment extends Fragment
     final CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
     try {
       if (!cameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
-        throw new RuntimeException("Time out waiting to lock camera opening.");
+//        throw new RuntimeException("Time out waiting to lock camera opening.");
+        activity.finish();
+        Intent intent = new Intent(getActivity(), CameraActivity.class);
+        getActivity().startActivity(intent);
       }
       manager.openCamera(cameraId, stateCallback, backgroundHandler);
     } catch (final CameraAccessException e) {
