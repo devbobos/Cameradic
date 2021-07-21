@@ -584,12 +584,12 @@ public class CameraActivity extends AppCompatActivity implements ImageReader.OnI
 
     @Override
     public boolean onKeyDown(final int keyCode, final KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-            debug = !debug;
-            requestRender();
-            onSetDebug(debug);
-            return true;
-        }
+//        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+//            debug = !debug;
+//            requestRender();
+//            onSetDebug(debug);
+//            return true;
+//        }
         return super.onKeyDown(keyCode, event);
     }
 
