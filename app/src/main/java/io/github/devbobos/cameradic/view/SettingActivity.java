@@ -2,8 +2,8 @@ package io.github.devbobos.cameradic.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,10 +26,10 @@ import io.github.devbobos.cameradic.presenter.SettingPresenter;
  */
 public class SettingActivity extends AppCompatActivity
 {
-    @BindView(R.id.setting_textview_regoniationMinValue) TextView textViewRegoniationMinValue;
-    @BindView(R.id.setting_textview_dictionaryType) TextView textViewDictionaryType;
-    @BindView(R.id.setting_checkbox_autoRecording) CheckBox checkBoxAutoRecording;
-    @BindView(R.id.setting_checkbox_showRecognitionMinValue) CheckBox checkBoxShowRecognitionMinValue;
+     @BindView(R.id.setting_textview_regoniationMinValue) TextView textViewRegoniationMinValue;
+     @BindView(R.id.setting_textview_dictionaryType) TextView textViewDictionaryType;
+     @BindView(R.id.setting_checkbox_autoRecording) CheckBox checkBoxAutoRecording;
+     @BindView(R.id.setting_checkbox_showRecognitionMinValue) CheckBox checkBoxShowRecognitionMinValue;
     @BindColor(R.color.colorAvalonYellow) int colorAvalonYellow;
     @BindColor(R.color.colorAvalonDeepYellow) int colorAvalonDeepYellow;
 

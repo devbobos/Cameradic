@@ -4,8 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.ActionBar;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.ActionBar;
 import android.view.Window;
 import android.view.WindowManager;
 

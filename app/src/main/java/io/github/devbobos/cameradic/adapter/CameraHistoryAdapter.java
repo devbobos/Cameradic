@@ -1,14 +1,12 @@
 package io.github.devbobos.cameradic.adapter;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -22,7 +20,6 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindColor;
-import butterknife.BindDrawable;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -309,12 +306,12 @@ public class CameraHistoryAdapter extends RecyclerView.Adapter<CameraHistoryAdap
 
     class CameraHistoryViewHolder extends RecyclerView.ViewHolder
     {
-        @BindView(R.id.item_textview_title) TextView textViewTitle;
-        @BindView(R.id.item_textview_description) TextView textViewDescription;
-        @BindView(R.id.item_textview_subtitle) TextView textViewSubtitle;
-        @BindView(R.id.item_textview_language) TextView textViewLanguage;
-        @BindView(R.id.item_imageview_favorite) AppCompatImageView imageViewFavorite;
-        @BindView(R.id.item_imageview_link) AppCompatImageView imageViewLink;
+         @BindView(R.id.item_textview_title) TextView textViewTitle;
+         @BindView(R.id.item_textview_description) TextView textViewDescription;
+         @BindView(R.id.item_textview_subtitle) TextView textViewSubtitle;
+         @BindView(R.id.item_textview_language) TextView textViewLanguage;
+         @BindView(R.id.item_imageview_favorite) AppCompatImageView imageViewFavorite;
+         @BindView(R.id.item_imageview_link) AppCompatImageView imageViewLink;
         @BindColor(R.color.colorAvalonWhite) int colorAvalonWhite;
         @BindColor(R.color.colorAvalonWhiteActionDown) int colorAvalonWhiteActionDown;
         @BindColor(R.color.colorAvalonYellow) int colorAvalonYellow;

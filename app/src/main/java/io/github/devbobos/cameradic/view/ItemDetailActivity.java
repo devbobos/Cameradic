@@ -1,10 +1,10 @@
 package io.github.devbobos.cameradic.view;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
+import androidx.annotation.Nullable;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,7 +23,6 @@ import butterknife.OnTouch;
 import io.github.devbobos.cameradic.R;
 import io.github.devbobos.cameradic.constant.SystemConstant;
 import io.github.devbobos.cameradic.helper.NetworkChecker;
-import io.github.devbobos.cameradic.helper.PreferenceHelper;
 import io.github.devbobos.cameradic.helper.TextHelper;
 import io.github.devbobos.cameradic.presenter.ItemDetailPresenter;
 
@@ -32,17 +31,17 @@ import io.github.devbobos.cameradic.presenter.ItemDetailPresenter;
  */
 public class ItemDetailActivity extends AppCompatActivity
 {
-    @BindView(R.id.itemdetail_linearlayout_container) LinearLayout linearLayoutContainer;
-    @BindView(R.id.itemdetail_imageview) ImageView imageView;
-    @BindView(R.id.itemdetail_textview_title) TextView textViewTitle;
-    @BindView(R.id.itemdetail_textview_description) TextView textViewDescription;
-    @BindView(R.id.itemdetail_textview_language) TextView textViewLanguage;
-    @BindView(R.id.itemdetail_textview_favorite) TextView textViewFavorite;
-    @BindView(R.id.itemdetail_imageview_favorite) AppCompatImageView imageViewFavorite;
-    @BindView(R.id.itemdetail_textview_link) TextView textViewLink;
-    @BindView(R.id.itemdetail_imageview_link) AppCompatImageView imageViewLink;
-    @BindView(R.id.itemdetail_textview_date) TextView textViewDate;
-    @BindView(R.id.itemdetail_textview_action) TextView textViewAction;
+     @BindView(R.id.itemdetail_linearlayout_container) LinearLayout linearLayoutContainer;
+     @BindView(R.id.itemdetail_imageview) ImageView imageView;
+     @BindView(R.id.itemdetail_textview_title) TextView textViewTitle;
+     @BindView(R.id.itemdetail_textview_description) TextView textViewDescription;
+     @BindView(R.id.itemdetail_textview_language) TextView textViewLanguage;
+     @BindView(R.id.itemdetail_textview_favorite) TextView textViewFavorite;
+     @BindView(R.id.itemdetail_imageview_favorite) AppCompatImageView imageViewFavorite;
+     @BindView(R.id.itemdetail_textview_link) TextView textViewLink;
+     @BindView(R.id.itemdetail_imageview_link) AppCompatImageView imageViewLink;
+     @BindView(R.id.itemdetail_textview_date) TextView textViewDate;
+     @BindView(R.id.itemdetail_textview_action) TextView textViewAction;
     @BindColor(R.color.colorAvalonWhite) int colorAvalonWhite;
     @BindColor(R.color.colorAvalonWhitePressed) int colorAvalonWhitePressed;
     @BindColor(R.color.colorAvalonWhiteActionDown) int colorAvalonWhiteActionDown;

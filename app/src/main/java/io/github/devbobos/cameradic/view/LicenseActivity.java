@@ -1,10 +1,10 @@
 package io.github.devbobos.cameradic.view;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.MenuItem;
 
 import butterknife.BindView;
@@ -19,7 +19,7 @@ import io.github.devbobos.cameradic.presenter.LicensePresenter;
  */
 public class LicenseActivity extends AppCompatActivity
 {
-    @BindView(R.id.license_recyclerview) RecyclerView recyclerView;
+     @BindView(R.id.license_recyclerview) RecyclerView recyclerView;
     private LicensePresenter presenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)

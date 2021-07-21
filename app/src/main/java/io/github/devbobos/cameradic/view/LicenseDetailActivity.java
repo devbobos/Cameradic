@@ -1,8 +1,8 @@
 package io.github.devbobos.cameradic.view;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -17,7 +17,7 @@ import io.github.devbobos.cameradic.presenter.LicenseDetailPresenter;
  */
 public class LicenseDetailActivity extends AppCompatActivity
 {
-    @BindView(R.id.licensedetail_textview) TextView textView;
+     @BindView(R.id.licensedetail_textview) TextView textView;
     private LicenseDetailPresenter presenter;
 
     @Override

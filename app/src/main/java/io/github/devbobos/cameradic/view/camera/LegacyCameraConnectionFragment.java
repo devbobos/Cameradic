@@ -25,8 +25,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.support.annotation.RequiresApi;
-import android.support.v7.widget.AppCompatImageView;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.AppCompatImageView;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -54,10 +54,10 @@ import io.github.devbobos.cameradic.view.SettingActivity;
 
 public class LegacyCameraConnectionFragment extends Fragment
 {
-  @BindView(R.id.camera_textureview) AutoFitTextureView textureView;
-  @BindView(R.id.camera_imageview_setting) AppCompatImageView imageViewSetting;
-  @BindView(R.id.camera_imageview_flash) AppCompatImageView imageViewFlash;
-  @BindView(R.id.camera_imageview_history) AppCompatImageView imageViewHistory;
+   @BindView(R.id.camera_textureview) AutoFitTextureView textureView;
+   @BindView(R.id.camera_imageview_setting) AppCompatImageView imageViewSetting;
+   @BindView(R.id.camera_imageview_flash) AppCompatImageView imageViewFlash;
+   @BindView(R.id.camera_imageview_history) AppCompatImageView imageViewHistory;
   @BindColor(R.color.colorAvalonWhite) int colorAvalonWhite;
   @BindColor(R.color.colorAvalonYellow) int colorAvalonYellow;
   @BindColor(R.color.colorAvalonDeepYellow) int colorAvalonDeepYellow;

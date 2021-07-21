@@ -1,8 +1,8 @@
 package io.github.devbobos.cameradic.adapter;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -158,9 +158,9 @@ public class LicenseAdapter extends RecyclerView.Adapter<LicenseAdapter.LicenseV
         @BindColor(R.color.colorAvalonDeepYellow) int colorAvalonDeepYellow;
         @BindColor(R.color.colorAvalonBlue) int colorAvalonBlue;
         @BindColor(R.color.colorAvalonDeepBlue) int colorAvalonDeepBlue;
-        @BindView(R.id.item_linearlayout_container) LinearLayout linearLayoutContainer;
-        @BindView(R.id.item_textview_title) TextView textViewTitle;
-        @BindView(R.id.item_textview_description) TextView textViewDescription;
+         @BindView(R.id.item_linearlayout_container) LinearLayout linearLayoutContainer;
+         @BindView(R.id.item_textview_title) TextView textViewTitle;
+         @BindView(R.id.item_textview_description) TextView textViewDescription;
         public LicenseViewHolder(View itemView)
         {
             super(itemView);

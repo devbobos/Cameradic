@@ -44,11 +44,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.AppCompatImageView;
+
 import android.text.TextUtils;
 import android.util.Size;
 import android.util.SparseIntArray;
@@ -58,12 +57,6 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.orhanobut.logger.Logger;
@@ -73,33 +66,25 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindColor;
-import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTouch;
 import io.github.devbobos.cameradic.R;
-import io.github.devbobos.cameradic.adapter.CameraHistoryAdapter;
 import io.github.devbobos.cameradic.component.AutoFitTextureView;
-import io.github.devbobos.cameradic.helper.NetworkChecker;
-import io.github.devbobos.cameradic.helper.PreferenceHelper;
-import io.github.devbobos.cameradic.model.CameraHistory;
-import io.github.devbobos.cameradic.presenter.CameraPresenter;
 import io.github.devbobos.cameradic.view.HistoryActivity;
 import io.github.devbobos.cameradic.view.SettingActivity;
 
 public class CameraConnectionFragment extends Fragment
 {
-  @BindView(R.id.camera_textureview) AutoFitTextureView textureView;
-  @BindView(R.id.camera_imageview_setting) AppCompatImageView imageViewSetting;
-  @BindView(R.id.camera_imageview_flash) AppCompatImageView imageViewFlash;
-  @BindView(R.id.camera_imageview_history) AppCompatImageView imageViewHistory;
+   @BindView(R.id.camera_textureview) AutoFitTextureView textureView;
+   @BindView(R.id.camera_imageview_setting) AppCompatImageView imageViewSetting;
+   @BindView(R.id.camera_imageview_flash) AppCompatImageView imageViewFlash;
+   @BindView(R.id.camera_imageview_history) AppCompatImageView imageViewHistory;
   @BindColor(R.color.colorAvalonWhite) int colorAvalonWhite;
   @BindColor(R.color.colorAvalonYellow) int colorAvalonYellow;
   @BindColor(R.color.colorAvalonDeepYellow) int colorAvalonDeepYellow;

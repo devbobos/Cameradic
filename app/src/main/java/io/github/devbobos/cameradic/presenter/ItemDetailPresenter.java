@@ -2,8 +2,8 @@ package io.github.devbobos.cameradic.presenter;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.ContactsContract;
-import android.support.v7.widget.AppCompatImageView;
+
+import androidx.appcompat.widget.AppCompatImageView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;

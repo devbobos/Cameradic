@@ -2,10 +2,10 @@ package io.github.devbobos.cameradic.view;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -27,9 +27,9 @@ import io.github.devbobos.cameradic.presenter.GuidePresenter;
  */
 public class GuideActivity extends AppCompatActivity
 {
-    @BindView(R.id.guide_textview_title) TextView textViewTitle;
-    @BindView(R.id.guide_textview_description) TextView textViewDescription;
-    @BindView(R.id.guide_imageview) AppCompatImageView imageView;
+     @BindView(R.id.guide_textview_title) TextView textViewTitle;
+     @BindView(R.id.guide_textview_description) TextView textViewDescription;
+     @BindView(R.id.guide_imageview) AppCompatImageView imageView;
     @BindColor(R.color.colorAvalonWhite) int colorAvalonWhite;
     @BindColor(R.color.colorAvalonWhitePressed) int colorAvalonWhitePressed;
     @BindString(R.string.guide_permission_info) String stringPermissionInfo;

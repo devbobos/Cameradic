@@ -2,11 +2,11 @@ package io.github.devbobos.cameradic.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindColor;
-import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -30,12 +29,12 @@ import io.github.devbobos.cameradic.presenter.HistoryPresenter;
  */
 public class HistoryActivity extends AppCompatActivity
 {
-    @BindView(R.id.history_linearlayout_list) LinearLayout linearLayoutList;
-    @BindView(R.id.history_linearlayout_favorite) LinearLayout linearLayoutFavorite;
-    @BindView(R.id.history_recyclerview) RecyclerView recyclerView;
-    @BindView(R.id.history_linearlayout_information) LinearLayout linearLayoutInformation;
-    @BindView(R.id.history_imageview_information) AppCompatImageView appCompatImageViewInformation;
-    @BindView(R.id.history_textview_information) TextView textViewInformation;
+     @BindView(R.id.history_linearlayout_list) LinearLayout linearLayoutList;
+     @BindView(R.id.history_linearlayout_favorite) LinearLayout linearLayoutFavorite;
+     @BindView(R.id.history_recyclerview) RecyclerView recyclerView;
+     @BindView(R.id.history_linearlayout_information) LinearLayout linearLayoutInformation;
+     @BindView(R.id.history_imageview_information) AppCompatImageView appCompatImageViewInformation;
+     @BindView(R.id.history_textview_information) TextView textViewInformation;
     @BindColor(R.color.colorAvalonWhite) int colorAvalonWhite;
     @BindColor(R.color.colorAvalonWhitePressed) int colorAvalonWhitePressed;
     @BindColor(R.color.colorAvalonWhiteActionDown) int colorAvalonWhiteActionDown;
